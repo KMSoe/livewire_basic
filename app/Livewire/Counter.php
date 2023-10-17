@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Counter extends Component
 {
+    use WithPagination;
+    
     public $count    = 0;
 
     #[Rule('required|min:3')] 
@@ -30,6 +33,10 @@ class Counter extends Component
             'email'    => $this->email,
             'password' => Hash::make($this->password),
         ]);
+
+        $this->reset(['name', 'email', 'password']);
+
+        session()->flash('success', 'User created successfully');
     }
 
     public function increment()
@@ -44,7 +51,7 @@ class Counter extends Component
 
     public function render()
     {
-        $users = User::all();
+        $users = User::paginate(2);
 
         return view('livewire.counter', [
             'users' => $users,
