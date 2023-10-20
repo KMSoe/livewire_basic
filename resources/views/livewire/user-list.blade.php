@@ -16,7 +16,7 @@
     </div>
 
     <h2 class="text-2xl mb-3">Users List</h2>
-    <input wire:offline.remove swire:model.live='search' type="text" placeholder="Search..."
+    <input wire:model.blur='search' type="text" placeholder="Search..."
         class="ring-1 ring-inset ring-gray-300 bg-gray-100 text-gray-900 text-sm rounded block w-full p-2.5 mx-auto">
 
     <div role="status"
